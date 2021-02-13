@@ -1,0 +1,50 @@
+https://leetcode.com/problems/largest-merge-of-two-strings/
+
+
+class Solution {
+    public String largestMerge(String word1, String word2) {
+        if (word1 == null || word1 == "") {
+            return word2;
+        }
+        
+        if (word2 == null || word2 == "") {
+            return word1;
+        }
+        
+        final int len1 = word1.length();
+        final int len2 = word2.length();
+        
+        final StringBuilder str = new StringBuilder();
+        
+        int i = 0;
+        int j = 0;
+        
+        while (i < len1 && j < len2) {
+            if (word1.charAt(0) > word2.charAt(0)) {
+                str.append(word1.charAt(0));
+                word1 = word1.deleteCharAt(0); // 
+                i++;
+            } else if (word1.charAt(i) < word2.charAt(j)) {
+                str.append(word2.charAt(j));
+                j++;
+            } else {
+                
+                if(word1.length.compareTo(word2.substring(j, len2)) > 0) {
+					str.append(word1.charAt(i++));
+				} else  {
+					str.append(word2.charAt(j++));
+				} 
+            }
+        }
+        
+        if (i < len1) {
+            str.append(word1.substring(i, len1));
+        }
+        
+        if (j < len2) {
+            str.append(word2.substring(j, len2));
+        }
+        
+        return str.toString();
+    }
+}
